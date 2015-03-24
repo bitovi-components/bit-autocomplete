@@ -1,0 +1,12 @@
+<div class="search-container">
+    <div class="search-form">
+        <input type="text" id="{{searchFieldId}}" class="search-field">
+    </div>
+    {{#results.length}}
+        <ul class="search-results">
+        {{#results}}
+            <li><button can-click="selectItem" class="search-results-item" data-context="{{.}}" type="button">{{getItem}}</button></li>
+        {{/results}}
+        </ul>
+    {{/results.length}}
+</div>
