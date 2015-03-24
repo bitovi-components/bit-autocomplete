@@ -1,7 +1,7 @@
 <!-- Template to load -->
 <script type="text/stache" id="demo" can-autorender>
   <can-import from="bit-autocomplete"/>
-  <bit-autocomplete model="{Search}" selected-item="{selectedItem}" validated="{validated}"></bit-autocomplete>
+  <bit-autocomplete model="{Search}" selected-item="{selectedItem}" validated="{validated}" debounce-delay="1000"></bit-autocomplete>
   <p>{{#validated}}You selected {{selectedItem.label}}.{{else}}Do a search then select an item...{{/validated}}</p>
 </script>
 
@@ -9,10 +9,7 @@
 <script src="./node_modules/steal/steal.js" main="can/view/autorender/">
 	import $ from "jquery";
 	import can from "can";
-	import "can/view/stache/";
     import "can/util/fixture/";
-    import "can/map/define/";
-    //import "can/view/stache/system";
         
     var fruits = [
         { label: "Granny Smith Apple"},
@@ -47,20 +44,9 @@
         findAll: "GET /test"
     },{});
     
-    var ViewModel = can.Map.extend({
-        define: {
-            selectedItem: {
-                value: {}
-            },
-            validated: {
-                value: false,
-                type: 'boolean'
-            }
-        },
-        Search: Search
+    $("#demo").viewModel().attr({
+        Search: Search,
+        selectedItem: {},
+        valdated: false
     });
-    console.log("assigning scope");
-    $('#demo').data("scope",  new ViewModel({}) );
-    
-    //$('body').append(can.view('demo')( new ViewModel({}) ) );
 </script>
