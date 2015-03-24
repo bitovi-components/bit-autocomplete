@@ -2,8 +2,12 @@ import can from 'can';
 import _ from 'lodash';
 import 'can/map/define/';
 
-export default can.Map({
+export default can.Map.extend({
+    init: function () {
+        this.doSearch = _.debounce( can.proxy(this.doSearch, this), this.attr('debounceDelay') );
+    },
     define:{
+        
         /**
          *
          *
@@ -11,6 +15,7 @@ export default can.Map({
         results: {
             value: []
         },
+        
         /**
          *
          *
@@ -70,34 +75,28 @@ export default can.Map({
      * @description Checks if criteria to commit findall has been met, builds and calls search if met.
      * @param {string} search The search string to send to findAll.
      */
-    preFlight: function(search) {
+    preFlight: function (search) {
         var self = this,
             data = {};
-        if (search && search.length >= this.attr('characterDelay')) {
-            var searchKey = this.attr('searchKey');
+        if (search && search.length >= self.attr('characterDelay')) {
+            var searchKey = self.attr('searchKey');
 
             data[searchKey] = search;
 
-            if (!self.debouncedSearch) {
-                self.debouncedSearch = _.debounce( can.proxy(self.doSearch, self), self.attr('debounceDelay') );
-            }
-
-            this.debouncedSearch(data);
+            self.doSearch(data)
         } else {
             if (search.length === 0) {
-                this.clearResults();
+                self.clearResults();
 
             }
         }
     },
     
-    debouncedSearch: null,
-    
     /**
      *
      *
      */
-    doSearch: function(data) {
+    doSearch: function (data) {
         var self = this,
             Model = self.attr('model'),
             results = self.attr('results'),
@@ -106,34 +105,45 @@ export default can.Map({
         def = Model.findAll(data);
         results.replace(def);
         def.fail(function(resp) {
-            //TODO: Handle errors
+            self.clearResults();
         });
     },
     
-    getItem: function(ctx) {
+    
+    /**
+     *
+     *
+     */
+    getItem: function (ctx) {
         if ( !can.isEmptyObject(ctx.attr()) ) {
             var keyName = this.attr('searchKey');
             return ctx.attr(keyName);
         }
         return '';
     },
+    
     /**
      *
      *
      */
-    selectItem: function(ctx) {
+    selectItem: function (ctx) {
         this.attr('validated', true);
         this.attr('selectedItem', ctx);
     },
+    
     /**
      *
      *
      */
-    clearResults: function(){
+    clearResults: function () {
         this.attr('results',[]);
     },
     
-    clearSelection: function() {
+    /**
+     *
+     *
+     */
+    clearSelection: function () {
         this.attr('validated', false);
         this.attr('selectedItem', {});
     }

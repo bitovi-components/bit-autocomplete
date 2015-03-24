@@ -19,7 +19,6 @@ can.Component.extend({
 			var vm = this.viewModel;
 			vm.attr('validated', false);
             vm.preFlight( $el.val() );
-
         },
 		
         /**
