@@ -18,9 +18,6 @@ module.exports = function (grunt) {
 				},
 				src: ['test/test.html']
 			},
-			manual: {
-				src: ['test/test.html']
-			},
 			ci: {
 				options: {
 					browsers: ['firefox']
@@ -48,5 +45,5 @@ module.exports = function (grunt) {
 	grunt.registerTask('demo',['steal-export','serve']);
 	grunt.registerTask('build',['steal-export']);
 	grunt.registerTask('test', [ isCI ? 'testee:ci' : 'testee:local' ]);
-	grunt.registerTask('test:manual', [ 'testee:manual' ]);
+	//grunt.regsiterTask('docs');
 };
