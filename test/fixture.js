@@ -28,6 +28,7 @@ can.fixture('GET /test', function(req) {
     var filtered = fruits.filter(function(item) {
         return item.label.toLowerCase().indexOf(req.data.label.toLowerCase()) > -1;
     });
+    console.log('FIXTURE');
     return filtered;
 });
 
