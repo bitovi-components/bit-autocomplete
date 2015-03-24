@@ -1,3 +1,6 @@
+/**
+ *
+ **/
 import can from 'can';
 import 'can/view/stache/';
 import template from './autocomplete.stache!';
@@ -12,8 +15,7 @@ can.Component.extend({
     events: {
 		
         /**
-         * 
-         *
+         * @description Runs pre flight on input event of search field.
          */
         '.search-field input': function( $el ) {
 			var vm = this.viewModel;
@@ -22,7 +24,7 @@ can.Component.extend({
         },
 		
         /**
-         *
+         * @description Clears results when a selection is updated.
          *
          */
         '{viewModel} selectedItem': function(a,b,item) {

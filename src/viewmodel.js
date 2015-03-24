@@ -1,3 +1,6 @@
+/**
+ *
+ **/
 import can from 'can';
 import _ from 'lodash';
 import 'can/map/define/';
@@ -7,36 +10,39 @@ export default can.Map.extend({
         this.doSearch = _.debounce( can.proxy(this.doSearch, this), this.attr('debounceDelay') );
     },
     define:{
-        
+
         /**
-         *
-         *
+         * @property {can.List} autocomplete.scope.results results
+         * @description Only true when a selection is intact.
+         * @option {can.List} Defaults to `false`.
          */
         results: {
             value: []
         },
-        
+
         /**
-         *
-         *
+         * @property {can.Map} autocomplete.scope.selectedItem selectedItem
+         * @description Only true when a selection is intact.
+         * @option {can.Map} Defaults to `false`.
          */
         selectedItem: {
             value: {}
         },
 
         /**
-         * @function autocomplete.scope.validated validated
-         * @description When a validated selection has been made, false when valid selection is manipulated or cleared.
-         * @return {Boolean}
+         * @property {Boolean} autocomplete.scope.validated validated
+         * @description Only true when a selection is intact.
+         * @option {Boolean} Defaults to `false`.
          */
         validated: {
             value: false,
             type: 'boolean'
         },
-        
+
         /**
-         *
-         *
+         * @property {string} autocomplete.scope.searchKey searchKey
+         * @description The primary key to use in search and displaying.
+         * @option {string} Defaults to `label`.
          */
         searchKey:{
             value:'label',
@@ -65,7 +71,7 @@ export default can.Map.extend({
     },
     
     /**
-     *
+     * @description The search model provided through live binding.
      *
      */
     model: {},
@@ -91,10 +97,11 @@ export default can.Map.extend({
             }
         }
     },
-    
+
     /**
-     *
-     *
+     * @function autocomplete.scope.doSearch doSearch
+     * @description Does the actual search.
+     * @param {string} data The search object for the findAll.
      */
     doSearch: function (data) {
         var self = this,
@@ -108,11 +115,12 @@ export default can.Map.extend({
             self.clearResults();
         });
     },
-    
-    
+
     /**
-     *
-     *
+     * @function autocomplete.scope.getItem getItem
+     * @description Helper that uses the search key to find the correct display value.
+     * @param {object} ctx The scope context.
+     * @return {string} The actual display value.
      */
     getItem: function (ctx) {
         if ( !can.isEmptyObject(ctx.attr()) ) {
@@ -121,27 +129,28 @@ export default can.Map.extend({
         }
         return '';
     },
-    
+
     /**
-     *
-     *
+     * @function autocomplete.scope.selectItem selectItem
+     * @description Does the actual search.
+     * @param {object} data The search object for the findAll.
      */
     selectItem: function (ctx) {
         this.attr('validated', true);
         this.attr('selectedItem', ctx);
     },
-    
+
     /**
-     *
-     *
+     * @function autocomplete.scope.clearResults clearResults
+     * @description Clears the results element.
      */
     clearResults: function () {
         this.attr('results',[]);
     },
-    
+
     /**
-     *
-     *
+     * @function autocomplete.scope.clearSelection clearSelection
+     * @description Clears the selection and resets validated to false.
      */
     clearSelection: function () {
         this.attr('validated', false);
