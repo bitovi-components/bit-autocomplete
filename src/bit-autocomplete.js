@@ -1,6 +1,36 @@
 /**
+ * @module {can.Component} autocomplete Autocomplete
+ * @parent components
+ * @author Juan Orozco
  *
- **/
+ *
+ * @description
+ * The autocomplete component renders a search `input`. It will search the provided `model` and render a list of results below the search input. When a result is selected, the component will replace the search string with the result.
+ *
+ *
+ * @signature '<pui-autocomplete></pui-autocomplete>'
+ *
+ * @param {can.Model} model Contains the model to search with.
+ * @param {String} searchFieldId The ID of the input element.
+ * @param {boolean} validited Marks when a selection is made.
+ * @param {can.Map} selectedItem The selected item object.
+ *
+ *
+ * @body
+ *
+ * ## Component Initialization
+ *
+ * ```html
+ *   <pui-autocomplete model="{model}"></pui-autocomplete>
+ * ```
+ *
+ * Add the `inputName` and `results` values if needed.
+ * ```html
+ *   <pui-autocomplete model="{model}" selected-item="{selectedItem}" validated="{validated}"></pui-autocomplete>
+ * ```
+ *
+ * @demo ./index.html
+ */
 import can from 'can';
 import 'can/view/stache/';
 import template from './autocomplete.stache!';

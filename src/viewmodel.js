@@ -1,6 +1,14 @@
 /**
+ * @module {can.Map} autocomplete/ViewModel View Model
+ * @parent autocomplete
+ * @author Juan Orozco
  *
- **/
+ * @description View model of the [autocomplete] component.
+ *
+ * @signature
+ * var ViewModel = can.Map.extend({});
+ *
+ */
 import can from 'can';
 import _ from 'lodash';
 import 'can/map/define/';
@@ -68,6 +76,19 @@ export default can.Map.extend({
             value: 400,
             type: 'number'
         },
+
+        /**
+         * @property {string} autocomplete.scope.searchFieldId searchFieldId
+         * @description The ID for the input element.
+         * @option {string} Defaults to dropdown with a random number suffix.
+         */
+         
+         searchFieldId: {
+            value: function () {
+                return 'autocomplete' + Math.floor( Math.random() * 1000000 );
+            },
+            type: 'string'
+         }
     },
     
     /**
