@@ -20,7 +20,7 @@ Once the user selects an item from the results list, the object is copied to the
 
 ## Dependancies
 
-The only dependancy in use, other than CanJS, is [Lo-Dash](). It is used for debouncing.
+The only dependancy in use, other than CanJS, is [Lo-Dash](https://lodash.com/). It is used for debouncing.
 
 ## Grunt
 
