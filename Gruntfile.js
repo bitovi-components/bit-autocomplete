@@ -1,4 +1,5 @@
 var path = require('path');
+var docConfig = require('./documentjs.json');
 var isCI = process.env.CI === 'true';
 
 module.exports = function (grunt) {
@@ -6,8 +7,10 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('steal-tools');
 	grunt.loadNpmTasks('testee');
 	grunt.loadNpmTasks('grunt-serve');
+  	grunt.loadNpmTasks('documentjs');
 	
-	grunt.initConfig({
+	var config = {
+		documentjs:{},
 		testee: {
 			options: {
 				reporter: 'Spec'
@@ -41,9 +44,12 @@ module.exports = function (grunt) {
 				}
 			}
 		}
-	});
-	grunt.registerTask('demo',['steal-export','serve']);
+	};
+	
+	config.documentjs = docConfig;
+	grunt.initConfig(config);
+	grunt.registerTask('server',['serve']);
 	grunt.registerTask('build',['steal-export']);
 	grunt.registerTask('test', [ isCI ? 'testee:ci' : 'testee:local' ]);
-	//grunt.regsiterTask('docs');
+	grunt.registerTask('docs', ['documentjs']);
 };
