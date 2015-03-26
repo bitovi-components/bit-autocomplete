@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import can from 'can';
-import QUnit from 'qunitjs';
+import QUnit from 'steal-qunit';
 import 'can/view/stache/';
 QUnit.config.autorun = false;
 
@@ -63,7 +63,7 @@ QUnit.test('searches', function (assert) {
 		equal($component.find('.search-results').length, 1, 'Displays results container');
 		equal($component.find('.search-results-item').length, 3, 'Renders the results items.');
 		done();
-	}, 110);
+	}, 260);
 });
 
 QUnit.module('item selection',{

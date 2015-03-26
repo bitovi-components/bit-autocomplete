@@ -69,6 +69,7 @@ export default can.Map.extend({
             type: 'number',
             set: function(newVal){
                 this.doSearch = _.debounce( can.proxy(this.search, this), newVal );
+                return newVal;
             }
         },
 
