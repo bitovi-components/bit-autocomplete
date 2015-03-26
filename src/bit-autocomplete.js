@@ -1,6 +1,9 @@
 /**
  * @module {can.Component} autocomplete Autocomplete
  * @parent components
+ * @group autocomplete/events 0 Events
+ * @group autocomplete/viewModel 1 ViewModel
+ *
  * @author Juan Orozco
  *
  *
@@ -11,10 +14,11 @@
  * @signature '<bit-autocomplete></bit-autocomplete>'
  *
  * @param {can.Model} model Contains the model to search with.
- * @param {String} searchFieldId The ID of the input element.
+ * @param {String} search-field-id The ID of the input element.
  * @param {boolean} validited Marks when a selection is made.
- * @param {can.Map} selectedItem The selected item object.
- *
+ * @param {can.Map} selected-item The selected item object.
+ * @param {Number} debounce-delay The amount of time to wait before searching.
+ * @param {Number} character-delay The number of characters that must be entered to trigger a search.
  *
  * @body
  *
@@ -43,9 +47,10 @@ can.Component.extend({
 	template: template,
 	viewModel: ViewModel,
     events: {
-		
+
         /**
-		 * @function autocomplete.searchField Search Field Input Event
+		 * @function autocomplete.events.searchField Search Field Input Event
+         * @parent autocomplete/events
          * @description Runs pre flight on input event of search field.
 		 * @param {selector} $el The element the event was triggered on.
          */
@@ -54,9 +59,10 @@ can.Component.extend({
 			vm.attr('validated', false);
             vm.preFlight( $el.val() );
         },
-		
+
         /**
-		 * @function autocomplete.selectedItem Selected Item Change Event
+		 * @function autocomplete.events.selectedItem Selected Item Change Event
+         * @parent autocomplete/events
          * @description Clears results when a selection is updated.
 		 * @param {can.Map} scope The element scope.
 		 * @param {string} key The key name of the scope property.
