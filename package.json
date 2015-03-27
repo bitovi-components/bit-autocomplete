@@ -1,0 +1,26 @@
+{
+  "name": "bit-autocomplete-docs",
+  "version": "0.0.0",
+  "description": "Documentation for bitovi-componets/bit-autocomplete",
+  "scripts": {
+    "documentjs": "./node_modules/.bin/documentjs"
+  },
+  "devDependencies": {
+    "documentjs": "bitovi/documentjs#0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitovi-components/bit-autocomplete"
+  },
+  "keywords": [
+    "CanJS",
+    "UI",
+    "Slider"
+  ],
+  "author": "Bitovi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bitovi-components/bit-autocomplete/issues"
+  },
+  "homepage": "http://bitovi-components.github.io/bit-autocomplete"
+}

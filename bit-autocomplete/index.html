@@ -1,0 +1,65 @@
+<!-- Template to load -->
+<script type="text/stache" id="demo" can-autorender>
+<can-import from="bit-autocomplete"/><bit-autocomplete
+  model="{Search}"
+  selected-item="{selectedItem}"
+  validated="{validated}">
+</bit-autocomplete>
+<p>
+  {{#validated}}
+    You selected {{selectedItem.label}}.
+  {{else}}
+    Do a search then select an item...
+  {{/validated}}
+</p>
+</script>
+
+<!-- Loading Script -->
+<script src="./node_modules/steal/steal.js" id="demo_source" main="can/view/autorender/">
+import $ from "jquery";
+import can from "can";
+import "can/util/fixture/";
+
+var fruits = [
+  { label: "Granny Smith Apple"},
+  { label: "McIntosh Apple"},
+  { label: "Fuji Apple"},
+  { label: "Red Delicious Apple"},
+  { label: "Pink Lady Apple"},
+  { label: "Golden Delcicious Apple"},
+  { label: "Gala Apple"},
+  { label: "Strawberry"},
+  { label: "Orange"},
+  { label: "Plum"},
+  { label: "Blueberry"},
+  { label: "Pear"},
+  { label: "Peach"},
+  { label: "Tomato"},
+  { label: "Fig"},
+  { label: "Watermelon"},
+  { label: "Melon"},
+  { label: "Sprite Melon"},
+  { label: "Lemon"}
+];
+
+can.fixture('GET /test', function(req) {
+  var filtered = fruits.filter(function(item) {
+    return item.label.toLowerCase().indexOf(req.data.label.toLowerCase()) > -1;
+  });
+  return filtered;
+});
+
+var Search = can.Model.extend({
+  findAll: "GET /test"
+},{});
+
+$("#demo").viewModel().attr({
+  Search: Search,
+  selectedItem: {},
+  valdated: false
+});
+</script>
+<script>
+  window.DEMO_HTML = document.getElementById("demo").innerHTML.replace('<can-import from="bit-autocomplete"/>', '');
+  window.DEMO_SOURCE = document.getElementById("demo_source").innerHTML;
+</script>

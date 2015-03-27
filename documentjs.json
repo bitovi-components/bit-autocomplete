@@ -1,0 +1,30 @@
+{
+    "versions": {
+        "0.0.1": {
+            "source": "git://github.com/bitovi-components/bit-autocomplete#master",
+            "sites": {
+                "docs": {
+                    "glob": {
+                        "ignore": ["{node_modules,bower_components}/**/*", "README.md"]
+                    },
+                    "parent": "autocomplete",
+                    "dest" : "../docs"
+                }
+            }
+        }
+    },
+    "defaultVersion": "0.0.1",
+    "versionDest": "<%= version %>",
+    "siteDefaults": {
+        "templates": "theme/templates",
+        "static": "theme/static"
+    },
+    "sites": {
+        "pages": {
+            "glob": "_pages/*.md",
+            "parent": "index",
+            "dest" : ".",
+            "pageConfig": {"page":"index"}
+        }
+    }
+}
