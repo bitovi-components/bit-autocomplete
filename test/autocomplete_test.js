@@ -2,14 +2,9 @@ import $ from 'jquery';
 import can from 'can';
 import QUnit from 'steal-qunit';
 import 'can/view/stache/';
-QUnit.config.autorun = false;
 
 import ViewModel from 'bit-autocomplete';
 import SearchModel from './fixture';
-//Steal has finished loading at this point so we just need to make sure Testee is ready
-if (window.Testee) {
-	Testee.init();
-}
 
 var vm, template, $component;
 
@@ -95,6 +90,3 @@ QUnit.test('item adds to input', function (assert) {
 		done();
 	},100);
 });
-
-//Load Qunit
-QUnit.load();
