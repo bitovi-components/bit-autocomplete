@@ -1,0 +1,10 @@
+{
+    "sites": {
+        "docs": {
+            "parent": "autocomplete",
+            "glob": {
+                "pattern": "src/**/*.{js,md}"
+            }
+        }
+    }
+}
