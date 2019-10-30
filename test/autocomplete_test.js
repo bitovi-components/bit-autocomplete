@@ -10,15 +10,15 @@ var vm, template, $component;
 
 QUnit.module('bit-autocomplete view model');
 
-QUnit.test('basics', function(){
+QUnit.test('basics', function(assert) {
 	vm = new ViewModel({});
 
-	equal( vm.attr('results').length, 0, 'Results array is empty');
-	equal( can.isEmptyObject(vm.attr('selectedItem').attr()), true, 'Selected object is empty');
-	equal( vm.attr('validated'), false, 'Validated is set to false');
-	equal( vm.attr('searchKey'), 'label', 'Search key default is label.');
-	equal( vm.attr('characterDelay'), 3, 'Character delay default is 3.');
-	equal( vm.attr('debounceDelay'), 250, 'Debounce delay is 250 ms.');
+	assert.equal( vm.attr('results').length, 0, 'Results array is empty');
+	assert.equal( can.isEmptyObject(vm.attr('selectedItem').attr()), true, 'Selected object is empty');
+	assert.equal( vm.attr('validated'), false, 'Validated is set to false');
+	assert.equal( vm.attr('searchKey'), 'label', 'Search key default is label.');
+	assert.equal( vm.attr('characterDelay'), 3, 'Character delay default is 3.');
+	assert.equal( vm.attr('debounceDelay'), 250, 'Debounce delay is 250 ms.');
 });
 
 QUnit.module('bit-autocomplete component',{
@@ -30,11 +30,11 @@ QUnit.module('bit-autocomplete component',{
 	}
 });
 
-QUnit.test('renders', function () {
-	equal($component.length, 1, 'Component rendered');
-	ok($component.find('.search-container').is(':visible'), 'Component template rendered');
-	ok($component.find('.search-field').is(':visible'), 'Search input visible');
-	ok($component.find('.search-results').not(':visible'), 'Search results not visible');
+QUnit.test('renders', function(assert) {
+	assert.equal($component.length, 1, 'Component rendered');
+	assert.ok($component.find('.search-container').is(':visible'), 'Component template rendered');
+	assert.ok($component.find('.search-field').is(':visible'), 'Search input visible');
+	assert.ok($component.find('.search-results').not(':visible'), 'Search results not visible');
 });
 
 QUnit.module('searching',{
@@ -55,8 +55,8 @@ QUnit.module('searching',{
 QUnit.test('searches', function (assert) {
 	var done = assert.async();
 	setTimeout(function(){
-		equal($component.find('.search-results').length, 1, 'Displays results container');
-		equal($component.find('.search-results-item').length, 3, 'Renders the results items.');
+		assert.equal($component.find('.search-results').length, 1, 'Displays results container');
+		assert.equal($component.find('.search-results-item').length, 3, 'Renders the results items.');
 		done();
 	}, 260);
 });
@@ -85,8 +85,8 @@ QUnit.test('item adds to input', function (assert) {
 		var targetLabel = $target.text();
 		$target.click();
 
-		equal($component.find('.search-results').is(':visible'), false, 'Removes results from view.');
-		equal($component.find('.search-field').val(), targetLabel, 'Replaced input value with selected value');
+		assert.equal($component.find('.search-results').is(':visible'), false, 'Removes results from view.');
+		assert.equal($component.find('.search-field').val(), targetLabel, 'Replaced input value with selected value');
 		done();
 	},100);
 });
